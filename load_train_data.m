@@ -1,10 +1,9 @@
+function images = load_train_data(filename)
+
 %this tool is to load the training
 %use 'data/train-images-idx3-ubyte' to load the training set
 
-function images = load_train_data(filename)
-
 fp = fopen(filename, 'rb');
-assert(fp ~= -1, ['Could not open ', filename, '']);
 
 magic = fread(fp, 1, 'int32', 0, 'ieee-be');
 assert(magic == 2051, ['Bad magic number in ', filename, '']);
