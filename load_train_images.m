@@ -1,4 +1,4 @@
-function images = load_train_data(filename)
+function images = load_train_images(filename)
 
 %this tool is to load the training
 %use 'data/train-images-idx3-ubyte' to load the training set
