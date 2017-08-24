@@ -4,7 +4,7 @@ This will be a basic neural network to classify handwritten digits from the [MNI
 
 ###  Matlab functions
 
-* The softmax function  is implemented in Matlab via the command 
+* The softmax function is implemented in Matlab via the command 
 ```matlab
 softmax
 ```
