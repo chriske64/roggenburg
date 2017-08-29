@@ -8,10 +8,21 @@ labels_test = loadMNISTLabels('t10k-labels.idx1-ubyte');
 % initial weights W
 W = 0.1*randn(28*28,10);
 
-%% Implement the minimization algorithm here!
-samples = get_samples(images, labels, 50);
-funct = loss(W, samples, 0.001);
-grad = getGrad(W, samples, 0.001);
+%% Constant step size gradient descent
+step_size = 0.001;
+regulariser_weight = 0.01;
+
+for k = 1:100
+    samples = get_samples(images, labels, 50);
+    grad = getGrad(W, samples, regulariser_weight);
+    W = W - step_size * grad; 
+
+end
+
+%% adaptive step size gradient descent
+
+
+%% proximal operator gradient descent
 
 
 %% Test your result - nothing to do here - the code works as is

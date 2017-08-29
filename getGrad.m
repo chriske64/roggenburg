@@ -24,6 +24,7 @@ for k = 1:amountData
     rawGrad(:,:,k) = 1/fac(k) *f(:,k)* scal(:,k)';
     rawGrad(:, label(k)+1,k) = rawGrad(:, label(k)+1,k) - f(:,k);
     sumGrad = sumGrad + rawGrad(:,:,k);
+end
     
 % gradients of regulariser
 gradReg = 2*amountData*W;
