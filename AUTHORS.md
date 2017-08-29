@@ -1,3 +1,5 @@
 # Authors
 
-* Christoph
+* Christoph Kehle
+* Sebastian Lunz
+* Fabian Hoppe
