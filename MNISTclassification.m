@@ -41,7 +41,18 @@ plot(regulariser_weight, results);
 
 
 %% proximal operator gradient descent
+step_size = 0.001;
+regulariser_weight = 0.001;
+batch_size = 50;
+for k = 1:1000
+    samples = get_samples(images, labels, batch_size);
+    grad = getGrad(W, samples, 0);
+    W = W - step_size * grad; 
+    W = prox_l1(W,step_size * regulariser_weight * batch_size);
+    if mod(k,10) == 0
+        acc = model_eval(images_test, labels_test,W);
+    end
 
-
+end
 %% Test model
 model_eval(images_test, labels_test, W)
