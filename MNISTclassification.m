@@ -11,16 +11,31 @@ W = 0.1*randn(28*28,10);
 %% Constant step size gradient descent
 step_size = 0.001;
 regulariser_weight = 0.01;
-
-for k = 1:100
+for k = 1:300
     samples = get_samples(images, labels, 50);
     grad = getGrad(W, samples, regulariser_weight);
     W = W - step_size * grad; 
     if mod(k,10) == 0
-        model_eval(images_test, labels_test,W);
+        acc = model_eval(images_test, labels_test,W);
     end
 
 end
+
+%% linesearch for hyperparameter fitting
+step_size = 0.001;
+regulariser_weight = 0.0005:0.0005:0.01;
+amount_points = length(regulariser_weight);
+results = zeros(amount_points,1);
+for j = 1:amount_points
+    for k = 1:300
+        samples = get_samples(images, labels, 50);
+        grad = getGrad(W, samples, regulariser_weight(j));
+        W = W - step_size * grad;
+    end
+    results(j) = model_eval(images_test, labels_test,W);
+end
+figure(1)
+plot(regulariser_weight, results);
 
 %% adaptive step size gradient descent
 
