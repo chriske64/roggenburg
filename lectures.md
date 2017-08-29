@@ -2,7 +2,7 @@
 
 ## Day 1
 
-### Morning lecture
+### Morning lecture (Prof. Crember and Prof. Moeller)
 * Basic introduction to convex optimization problems including examples from [Continuous Optimization (Nonlinear and Linear Programming)](https://pdfs.semanticscholar.org/c331/2b37f9a719231b923cbd734654362dd26853.pdf)
 * Newton method: for second order system, i.e. where either the loss functions or constraints involve second order differential operators.
 * More detailed example on computer vision for self-driving cars
@@ -31,6 +31,8 @@
 
 ### Morning lecture
 
+#### First part (Prof. Cremers)
+
 * Review of basic convex optimization
   * differentiability
   * convex energy and minimization problems
@@ -44,3 +46,10 @@
     * proximal gradient for sum of smooth and non-smooth function in loss functions
     * prox is generalisation of projection: given closed, proper, convex function $G:\mathbb{R}^n \to \mathbb{R} \cup \{\infty\}$ the map $\operatorname{prox}_G(v) = \operatorname{argmin}_{u\in \mathbb{R}^n} G(u) + \frac 12 \| u - v\|^2$
     * proximal operator as implicit gradient descent $u_{k+1} = u_k - \nabla G (u_{k+1})$ if $u_{k+1} = \operatorname{prox}_G u_{k}$
+    * examples of proximals
+
+#### Second part (Prof. Moeller)
+
+* quick recap of proximal gradient
+* motiviation: $\min_u \| Au - f\|_{1}$ although the proximal matpping of the $\ell^1$ norm is easy to compute
+* rewrite:
