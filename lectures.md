@@ -51,5 +51,5 @@
 #### Second part (Prof. Moeller)
 
 * quick recap of proximal gradient
-* motiviation: $\min_u \| Au - f\|_{1}$ although the proximal matpping of the $\ell^1$ norm is easy to compute
-* rewrite:
+* motiviation: $\min_u \| Au - f\|_{1}$, although the proximal matpping of the $\ell^1$ norm is easy to compute
+* leads to augmented Lagrangian aka ADMM algorithm
