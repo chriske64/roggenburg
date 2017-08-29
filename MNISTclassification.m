@@ -11,6 +11,7 @@ W = 0.1*randn(28*28,10);
 %% Implement the minimization algorithm here!
 samples = get_samples(images, labels, 50);
 funct = loss(W, samples, 0.001);
+grad = getGrad(W, samples, 0.001);
 
 
 %% Test your result - nothing to do here - the code works as is

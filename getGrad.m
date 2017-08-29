@@ -5,7 +5,7 @@ function [ gradients ] = getGrad( W, sample, alpha )
 
 % extract raw data from inputs
 f = sample(1:784,:);
-label = sample(785,:);
+label = int32(sample(785,:));
 amountData = size(sample,2);
 
 
@@ -13,7 +13,7 @@ amountData = size(sample,2);
 scal = exp(W' * f);
 
 % compute weighting factor
-fac = scal * ones(10,1);
+fac = ones(1,10) * scal;
 
 % initialize Variables
 rawGrad = zeros(784,10, amountData);
