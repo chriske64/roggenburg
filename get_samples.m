@@ -1,13 +1,20 @@
-function [ samples ] = get_samples( amout, str )
-%get_samples Takes as an input amout of samples to produce. Outputs samples
+function [ samples ] = get_samples(images,labels, amount)
+%get_samples Takes as an input amout of samples to produce and the images and labels. The input of images is 28^2 x [amout of train/test images]. Outputs samples
 %in format R^(28^2 +1) x R^amout
 
-if str == 'train'
+%initialize variable
+samples = zeros(28.^2+1,amount);
 
-elseif str == 'test'
-
+if amount > size(images,2)
+    print('ERROR, you cannot choose that many samples')
 else
-    print('Error, second element of get_samples should be string which is either train or test')
+
+which_samples = randperm(size(images,2),amount);
+images = images(:,which_samples);
+labels = labels(:,which_samples);
+samples(1:28^2,:) = images;
+samples(28.^2 +1,:) = labels;
+    
 end
 
 end
