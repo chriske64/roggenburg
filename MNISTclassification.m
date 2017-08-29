@@ -16,6 +16,9 @@ for k = 1:100
     samples = get_samples(images, labels, 50);
     grad = getGrad(W, samples, regulariser_weight);
     W = W - step_size * grad; 
+    if mod(k,10) == 0
+        model_eval(images_test, labels_test,W);
+    end
 
 end
 
@@ -25,9 +28,5 @@ end
 %% proximal operator gradient descent
 
 
-%% Test your result - nothing to do here - the code works as is
-num_test = size(images_test, 2);
-[~,predictedLabels] = max(images_test'*W,[],2);
-correct = sum(((predictedLabels - labels_test -1)==0));
-test_correct_percent = correct / num_test;
-disp(['The network classified ', num2str(test_correct_percent*100),'% of the test data correctly!']);
+%% Test model
+model_eval(images_test, labels_test, W)
