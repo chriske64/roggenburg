@@ -1,6 +1,7 @@
 function energy = loss(W,samples,alpha)
 %extract sample size
 amountData = size(samples,2);
+energy = 0;
 if alpha ~= 0
     for i=1:amountData
         %extract one sample from samples
