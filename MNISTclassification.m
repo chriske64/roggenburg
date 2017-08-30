@@ -10,7 +10,7 @@ W = 0.1*randn(28*28,10);
 
 %% Constant step size gradient descent
 step_size = 0.001;
-regulariser_weight = 0.01;
+regulariser_weight = 0.003;
 for k = 1:300
     samples = get_samples(images, labels, 50);
     grad = getGrad(W, samples, regulariser_weight);
@@ -27,7 +27,7 @@ regulariser_weight = 0.0005:0.0005:0.01;
 amount_points = length(regulariser_weight);
 results = zeros(amount_points,1);
 for j = 1:amount_points
-    for k = 1:300
+    for k = 1:1000
         samples = get_samples(images, labels, 50);
         grad = getGrad(W, samples, regulariser_weight(j));
         W = W - step_size * grad;
