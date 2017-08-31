@@ -8,7 +8,7 @@ if alpha ~= 0
         onesample = samples(:,i);
         image = onesample(1:length(onesample)-1);
         label = int32(onesample(length(onesample)));
-        energy = energy + log(norm(exp(W' * image),1) - dot( image,W(:,label+1))) + alpha .* norm(W,'fro');
+        energy = energy + log(sum(exp(W' * image))) - dot( image,W(:,label+1)) + alpha .* norm(W,'fro').^2;
     end
 else
     for i=1:amountData
@@ -16,7 +16,7 @@ else
         onesample = samples(:,i);
         image = onesample(1:length(onesample)-1);
         label = onesample(length(onesample));
-        energy =  energy + log(norm(exp(W' * image),1) - dot(image,W(:,label+1)));
+        energy =  energy + log(sum(exp(W' * image))) - dot(image,W(:,label+1));
     end
 end
 
