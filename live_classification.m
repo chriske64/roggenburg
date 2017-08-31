@@ -10,21 +10,26 @@ figure;
 while true
 
 pic = cam.snapshot();
-c = clock;
-seconds = round(c(6));
-if mod(seconds,1) == 0
-picg = imresize(pic, [28,28]);
-picg =  double(reshape(rgb2gray(picg),[28.^2,1]))/255;
+
+picg = rgb2gray(pic);
+picg = imcrop(picg,[390,60,500,500]);
+picg = imresize(picg, [28,28]);
 picg = imcomplement(picg);
-picg = picg.^2;
+
+picg = thresholding(double(picg),160);
+
+picg =  double(reshape((picg),[28.^2,1]))/255;
 
 probs = picg'*W;
 [maxprob,label] = max(probs);
 probs = exp(probs)/sum(exp(probs));
-end
+
 
 subplot(1,3,1);
 imshow(pic);
+hold on;
+rectangle('Position', [390,60,500,500], 'LineWidt',4, 'Edgecolor','r' );
+hold off;
 subplot(1,3,2);
 imshow(reshape(picg, [28,28]));
 title(['This is a ', num2str(label-1), ' with probability ', num2str(probs(label)*100), '%']);

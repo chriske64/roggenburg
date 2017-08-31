@@ -11,14 +11,12 @@ W = 0.1*randn(28*28,10);
 %% Constant step size gradient descent
 step_size = 0.001;
 regulariser_weight = 0.003;
-%Acc_Grad_Descent = [];
 for k = 1:1000
     samples = get_samples(images, labels, 50);
     grad = getGrad(W, samples, regulariser_weight);
     W = W - step_size * grad; 
     if mod(k,10) == 0
         acc = model_eval(images_test, labels_test,W);
-        %Acc_Grad_Descent = [Acc_Grad_Descent,acc];
     end
 end
 
@@ -60,7 +58,6 @@ end
 step_size = 0.001;
 regulariser_weight = 0.003;
 batch_size = 50;
-%Acc_Nesterov = [];
 % Initialise variables for Nesterov's acc. gradient descent
 t =1;
 tp = t;
@@ -74,15 +71,9 @@ for k = 1:1000
     W = Up + (t-1)./tp * (Up - U);
     if mod(k,10) == 0
         acc = model_eval(images_test, labels_test,W);
-        %Acc_Nesterov = [Acc_Nesterov; acc];
     end
 end
 
-%% plot Nesterov vs. gradient descent
 
-figure;
-plot(Acc_Nesterov);
-hold on
-plot(Acc_Grad_Descent);
 %% Test model
 model_eval(images_test, labels_test, W)
