@@ -15,6 +15,7 @@ picg = rgb2gray(pic);
 picg = imcrop(picg,[390,60,500,500]);
 picg = imresize(picg, [28,28]);
 picg = imcomplement(picg);
+picg = imadjust(picg);
 
 picg = thresholding(double(picg),160);
 
