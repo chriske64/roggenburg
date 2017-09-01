@@ -7,9 +7,9 @@ function [ normalized_pic ] = normalize( pic, alpha )
 % cut out sharply at figure borders
 size_p = size(pic);
 contracted_v = pic * ones(size_p(2),1);
-[upper, lower] = borders(contracted_v)
+[upper, lower] = borders(contracted_v);
 contracted_h = pic' * ones(size_p(1),1);
-[left, right] = borders(contracted_h)
+[left, right] = borders(contracted_h);
 pruned_pic = pic(upper:lower, left:right);
 pruned_size = size(pruned_pic);
 
@@ -32,6 +32,7 @@ ulc(1) = floor((new_size - pruned_size(1))/2);
 ulc(2) = floor((new_size - pruned_size(2))/2);
 normal_pic(ulc(1):(ulc(1)+pruned_size(1)-1), ulc(2):(ulc(2)+pruned_size(2)-1)) = pruned_pic;
 normalized_pic = imresize(normal_pic, [28,28]);
+normalized_pic = reshape(normalized_pic, 28*28);
 end
 
 function [first, last] = borders (vec)
