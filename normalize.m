@@ -5,18 +5,18 @@ function [ normalized_pic ] = normalize( pic, alpha )
 %output picture is reshaped to 28x28
 
 % cut out sharply at figure borders
-size = shape(pic);
-contracted_v = pic * ones(size(2),1);
-[upper, lower] = borders(contracted_v);
-contracted_h = pic' * ones(size(1),1);
-[left, right] = borders(contracted_h);
+size_p = size(pic);
+contracted_v = pic * ones(size_p(2),1);
+[upper, lower] = borders(contracted_v)
+contracted_h = pic' * ones(size_p(1),1);
+[left, right] = borders(contracted_h)
 pruned_pic = pic(upper:lower, left:right);
-pruned_size = shape(pruned_pic);
+pruned_size = size(pruned_pic);
 
 % ensure cut picture has minimum size
 if max(pruned_size)<28
     pruned_pic = zeros(28,28);
-    pruned_size = shape(pruned_pic);
+    pruned_size = size(pruned_pic);
 end
 
 % Do 0-padding around sharp cut
@@ -30,7 +30,7 @@ normal_pic = zeros(new_size, new_size);
 ulc = [1,1];
 ulc(1) = floor((new_size - pruned_size(1))/2);
 ulc(2) = floor((new_size - pruned_size(2))/2);
-normal_pic(ulc(1):(ulc(1)+pruned_size(1)-1), ulc(2):(ulc(2)+pruned_size(2)-1));
+normal_pic(ulc(1):(ulc(1)+pruned_size(1)-1), ulc(2):(ulc(2)+pruned_size(2)-1)) = pruned_pic;
 normalized_pic = imresize(normal_pic, [28,28]);
 end
 
