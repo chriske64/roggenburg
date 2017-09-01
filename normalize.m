@@ -32,7 +32,7 @@ ulc(1) = floor((new_size - pruned_size(1))/2);
 ulc(2) = floor((new_size - pruned_size(2))/2);
 normal_pic(ulc(1):(ulc(1)+pruned_size(1)-1), ulc(2):(ulc(2)+pruned_size(2)-1)) = pruned_pic;
 normalized_pic = imresize(normal_pic, [28,28]);
-normalized_pic = reshape(normalized_pic, 28*28);
+normalized_pic = reshape(normalized_pic, [28*28,1]);
 end
 
 function [first, last] = borders (vec)
