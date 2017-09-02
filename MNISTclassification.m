@@ -8,17 +8,53 @@ labels_test = loadMNISTLabels('t10k-labels.idx1-ubyte');
 % initial weights W
 W = 0.1*randn(28*28,10);
 
-%% Constant step size gradient descent
+%% preprocesing
+image_format = size(images);
+images_modified = zeros(image_format);
+for k = 1:image_format(2)
+   image = reshape(images(:,k), [28,28]);
+   upsampled_im = imresize(image, [28*4, 28*4]);
+   normed_im = normalize(upsampled_im, 0.3);
+   images_modified(:,k) = normed_im;
+   k
+end
+save('images_modified.mat', 'images_modified');
+
+%%
+image_t_format = size(images_test);
+images_test_modified = zeros(image_t_format);
+for k = 1:image_t_format(2)
+   image = reshape(images_test(:,k), [28,28]);
+   upsampled_im = imresize(image, [28*4, 28*4]);
+   normed_im = normalize(upsampled_im, 0.3);
+   images_test_modified(:,k) = normed_im;
+   k
+end
+save('images_test_modified.mat', 'images_test_modified');
+
+%% testing
+number = 3
+original = reshape(images_test(:,number), [28,28]);
+modified = reshape(images_test_modified(:,number), [28,28]);
+figure
+subplot(211)
+imshow(original)
+subplot(212)
+imshow(modified)
+
+
+%% Constant step size gradient descent on modified data
 step_size = 0.001;
 regulariser_weight = 0.003;
 for k = 1:1000
-    samples = get_samples(images, labels, 50);
+    samples = get_samples(images_modified, labels, 50);
     grad = getGrad(W, samples, regulariser_weight);
     W = W - step_size * grad; 
     if mod(k,10) == 0
-        acc = model_eval(images_test, labels_test,W);
+        acc = model_eval(images_test_modified, labels_test,W);
     end
 end
+save('W.mat', 'W')
 
 %% linesearch for hyperparameter fitting
 step_size = 0.001;
