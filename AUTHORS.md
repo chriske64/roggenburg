@@ -1,5 +1,0 @@
-# Authors
-
-* Christoph
-* Fabian
-* Sebastian
