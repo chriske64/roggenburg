@@ -1,8 +1,8 @@
 %% load images and set up problem - nothing to be done here
-images = loadMNISTImages('train-images.idx3-ubyte');
-labels = loadMNISTLabels('train-labels.idx1-ubyte');
-images_test = loadMNISTImages('t10k-images.idx3-ubyte');
-labels_test = loadMNISTLabels('t10k-labels.idx1-ubyte');
+images = loadMNISTImages('data/train-images.idx3-ubyte');
+labels = loadMNISTLabels('data/train-labels.idx1-ubyte');
+images_test = loadMNISTImages('data/t10k-images.idx3-ubyte');
+labels_test = loadMNISTLabels('data/t10k-labels.idx1-ubyte');
 
 
 % initial weights W
